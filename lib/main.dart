@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final String title;
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({this.title}) : super();
 
   @override
   Widget build(BuildContext context) {
