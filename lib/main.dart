@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './avenger.dart';
 
 void main() => runApp(MyApp());
 
@@ -6,6 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.red,
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(
-                  fontSize: 30,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -42,28 +44,27 @@ class MyHomePage extends StatelessWidget {
   final String title;
   MyHomePage({this.title}) : super();
 
+  final avengers = [
+    {'name': 'Black Panther', 'imgSrc': 'images/black_pahter.jpg'},
+    {'name': 'Captain Marvel', 'imgSrc': 'images/captain_marvel.jpg'},
+    {'name': 'Iron Man', 'imgSrc': 'images/iron_man.jpg'},
+    {'name': 'Thanos', 'imgSrc': 'images/thanos.jpg'},
+    {'name': 'Spider Man', 'imgSrc': 'images/spider_man.jpg'},
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-              style: Theme.of(context).textTheme.body1,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      body: ListView.builder(
+          padding: EdgeInsets.all(20),
+          itemCount: avengers.length,
+          itemBuilder: (BuildContext ctx, int index) {
+            return Avenger(avengers[index]['name'], avengers[index]['imgSrc']);
+          }),
     );
   }
 }
