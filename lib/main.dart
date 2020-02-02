@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './avenger.dart';
 
 void main() => runApp(MyApp());
 
@@ -43,20 +44,27 @@ class MyHomePage extends StatelessWidget {
   final String title;
   MyHomePage({this.title}) : super();
 
+  final avengers = [
+    {'name': 'Black Panther', 'imgSrc': 'images/black_pahter.jpg'},
+    {'name': 'Captain Marvel', 'imgSrc': 'images/captain_marvel.jpg'},
+    {'name': 'Iron Man', 'imgSrc': 'images/iron_man.jpg'},
+    {'name': 'Thanos', 'imgSrc': 'images/thanos.jpg'},
+    {'name': 'Spider Man', 'imgSrc': 'images/spider_man.jpg'},
+  ];
+
   @override
   Widget build(BuildContext context) {
-    AssetImage assetImage = AssetImage('images/spider_man.jpg');
-    Image image = Image(image: assetImage, width: double.infinity);
-
-    AssetImage assetImage2 = AssetImage('images/iron_man.jpg');
-    Image image2 = Image(image: assetImage2, width: double.infinity);
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(title),
       ),
-      body: Column(children: <Widget>[image, image2]),
+      body: ListView.builder(
+          padding: EdgeInsets.all(20),
+          itemCount: avengers.length,
+          itemBuilder: (BuildContext ctx, int index) {
+            return Avenger(avengers[index]['name'], avengers[index]['imgSrc']);
+          }),
     );
   }
 }
